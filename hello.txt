@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- <button onclick="handleClick()"> get</button> -->
+    <input type="text" oninput="handlechange()" >
+    <ul></ul>
+
+</body>
+<script>
+    var inp=document.getElementsByTagName("input")[0]
+    var ul=document.getElementsByTagName("ul")[0]
+
+     let arr=0
+    fetch("https://gist.githubusercontent.com/Miserlou/c5cd8364bf9b2420bb29/raw/2bf258763cdddd704f8ffd3ea9a3e81d25e2c6f6/cities.json")
+        .then(res=>res.json())
+        .then(data=>arr=data)
+
+    function handlechange(){
+        // console.log(arr);
+        let val=inp.value
+
+       let x= arr.filter((e)=>{
+             return e.state.includes(val)
+        })
+        console.log(x);
+        let show=""
+        x.forEach(elm => {
+            show+=`<li>City Name: ${elm.city}</li>
+                 <li>State Name: ${elm.state}</li>`
+                 ul.innerHTML=show
+          
+      });
+       
+
+    }
+
+
+
+       
+        
+
+
+    
+</script>
+</html>
